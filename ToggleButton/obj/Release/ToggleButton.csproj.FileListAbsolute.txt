@@ -1,0 +1,4 @@
+C:\Users\katsuma\Documents\Visual Studio 2010\Projects\CustomButtonLib\ToggleButton\bin\Release\ToggleButton.dll
+C:\Users\katsuma\Documents\Visual Studio 2010\Projects\CustomButtonLib\ToggleButton\bin\Release\ToggleButton.pdb
+C:\Users\katsuma\Documents\Visual Studio 2010\Projects\CustomButtonLib\ToggleButton\obj\Release\ToggleButton.dll
+C:\Users\katsuma\Documents\Visual Studio 2010\Projects\CustomButtonLib\ToggleButton\obj\Release\ToggleButton.pdb

@@ -1,0 +1,9 @@
+C:\Users\katsumaPC\Desktop\SourceTree\NET Framework\CustomButtonLib\ClassLibrary1\obj\Debug\ClassLibrary1.csprojResolveAssemblyReference.cache
+C:\Users\katsumaPC\Desktop\SourceTree\NET Framework\CustomButtonLib\ClassLibrary1\bin\Debug\ClassLibrary1.dll
+C:\Users\katsumaPC\Desktop\SourceTree\NET Framework\CustomButtonLib\ClassLibrary1\bin\Debug\ClassLibrary1.pdb
+C:\Users\katsumaPC\Desktop\SourceTree\NET Framework\CustomButtonLib\ClassLibrary1\bin\Debug\HAPTIVITYLib.dll
+C:\Users\katsumaPC\Desktop\SourceTree\NET Framework\CustomButtonLib\ClassLibrary1\bin\Debug\HAPTIVITYLib.pdb
+C:\Users\katsumaPC\Desktop\SourceTree\NET Framework\CustomButtonLib\ClassLibrary1\obj\Debug\ClassLibrary1.dll
+C:\Users\katsumaPC\Desktop\SourceTree\NET Framework\CustomButtonLib\ClassLibrary1\obj\Debug\ClassLibrary1.pdb
+C:\Users\katsumaPC\Desktop\SourceTree\NET Framework\CustomButtonLib\ClassLibrary1\obj\Debug\ClassLibrary1.UserControl1.resources
+C:\Users\katsumaPC\Desktop\SourceTree\NET Framework\CustomButtonLib\ClassLibrary1\obj\Debug\ClassLibrary1.csproj.GenerateResource.Cache
