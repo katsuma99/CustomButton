@@ -69,9 +69,9 @@
     <None Include="Resources\FormSupport.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HaptivityLib\ImageButtonLib.csproj">
+    <ProjectReference Include="..\CustomButtonLib\CustomButtonLib.csproj">
       <Project>{dcd7ed9c-5471-4def-8f23-b7b6ca5a7631}</Project>
-      <Name>ImageButtonLib</Name>
+      <Name>CustomButtonLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

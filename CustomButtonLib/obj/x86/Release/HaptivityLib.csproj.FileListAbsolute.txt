@@ -1,0 +1,12 @@
+C:\Users\katsuma\Desktop\2.製作中のコードローカルに保存　（完成時1.更新）\20170306_HapticLibrary\CustomButtonLibver004\HaptivityLib\obj\x86\Release\HaptivityLib.ComPortEntry.resources
+C:\Users\katsuma\Desktop\2.製作中のコードローカルに保存　（完成時1.更新）\20170306_HapticLibrary\CustomButtonLibver004\HaptivityLib\obj\x86\Release\HaptivityLib.Properties.Resources.resources
+C:\Users\katsuma\Desktop\2.製作中のコードローカルに保存　（完成時1.更新）\20170306_HapticLibrary\CustomButtonLibver004\HaptivityLib\obj\x86\Release\HaptivityLib.csproj.GenerateResource.Cache
+C:\Users\katsuma\Desktop\2.製作中のコードローカルに保存　（完成時1.更新）\20170306_HapticLibrary\CustomButtonLibver011\HaptivityLib\bin\Release\HaptivityLib.dll
+C:\Users\katsuma\Desktop\2.製作中のコードローカルに保存　（完成時1.更新）\20170306_HapticLibrary\CustomButtonLibver011\HaptivityLib\bin\Release\HaptivityLib.pdb
+C:\Users\katsuma\Desktop\2.製作中のコードローカルに保存　（完成時1.更新）\20170306_HapticLibrary\CustomButtonLibver011\HaptivityLib\obj\x86\Release\HaptivityLib.ComPortEntry.resources
+C:\Users\katsuma\Desktop\2.製作中のコードローカルに保存　（完成時1.更新）\20170306_HapticLibrary\CustomButtonLibver011\HaptivityLib\obj\x86\Release\HaptivityLib.FileLoader.resources
+C:\Users\katsuma\Desktop\2.製作中のコードローカルに保存　（完成時1.更新）\20170306_HapticLibrary\CustomButtonLibver011\HaptivityLib\obj\x86\Release\HaptivityLib.Interface.resources
+C:\Users\katsuma\Desktop\2.製作中のコードローカルに保存　（完成時1.更新）\20170306_HapticLibrary\CustomButtonLibver011\HaptivityLib\obj\x86\Release\HaptivityLib.Properties.Resources.resources
+C:\Users\katsuma\Desktop\2.製作中のコードローカルに保存　（完成時1.更新）\20170306_HapticLibrary\CustomButtonLibver011\HaptivityLib\obj\x86\Release\HaptivityLib.csproj.GenerateResource.Cache
+C:\Users\katsuma\Desktop\2.製作中のコードローカルに保存　（完成時1.更新）\20170306_HapticLibrary\CustomButtonLibver011\HaptivityLib\obj\x86\Release\HaptivityLib.dll
+C:\Users\katsuma\Desktop\2.製作中のコードローカルに保存　（完成時1.更新）\20170306_HapticLibrary\CustomButtonLibver011\HaptivityLib\obj\x86\Release\HaptivityLib.pdb
