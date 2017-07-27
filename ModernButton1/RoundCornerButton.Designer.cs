@@ -33,7 +33,6 @@
             // RoundCornerButton
             // 
             this.BackColor = System.Drawing.Color.Transparent;
-            this.UseVisualStyleBackColor = false;
             this.ResumeLayout(false);
 
         }

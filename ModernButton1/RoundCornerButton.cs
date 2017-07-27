@@ -7,25 +7,47 @@ using System.Drawing.Drawing2D;
 
 namespace ModernButtonLib
 {
-    public partial class RoundCornerButton : Button
+    [Description("角が丸いボタン")]
+    [DefaultEvent("Click")]
+    public partial class RoundCornerButton : UserControl
     {
-		private int shadowSize = 6;     // 影の大きさ
-        private int cornerR = 10;       // コーナーの角丸のサイズ（直径）
+        public enum Number0To100
+        {
+            _0, _1, _2, _3, _4, _5, _6, _7, _8, _9,
+            _10, _11, _12, _13, _14, _15, _16, _17, _18, _19,
+            _20, _21, _22, _23, _24, _25, _26, _27, _28, _29,
+            _30, _31, _32, _33, _34, _35, _36, _37, _38, _39,
+            _40, _41, _42, _43, _44, _45, _46, _47, _48, _49,
+            _50, _51, _52, _53, _54, _55, _56, _57, _58, _59,
+            _60, _61, _62, _63, _64, _65, _66, _67, _68, _69,
+            _70, _71, _72, _73, _74, _75, _76, _77, _78, _79,
+            _80, _81, _82, _83, _84, _85, _86, _87, _88, _89,
+            _90, _91, _92, _93, _94, _95, _96, _97, _98, _99, _100,
+        }
+
+        private int shadowSize = 6;// 影の大きさ
+        private int cornerR = 10;// コーナーの角丸のサイズ（直径）
+        private Color surfaceColor = Color.SlateGray;// ボタン表面の色
+        private Color highLightColor = Color.White;// ボタン表面のハイライトの色
+        private Color borderColor = Color.Orange;// ボタン上にマウスが来た時の枠の色
+        private Color focusColor = Color.Blue;// ボタン上にフォーカスが当たっている時の枠の色
+        private string buttonText = "RoundButton";// ボタンの文字列
+        private bool mouseDowning = false;// マウスが押されている間だけ True
 
         #region "デザイン時外部公開プロパティ"
-        [Category("ModernDesign")]
+        [Category("Appearance")]
         [Browsable(true)]
         [Description("角の丸さを指定します。（半径）")]
-        public int CornerR
+        public Number0To100 CornerR
         {
             get
             {
-                return (int)(cornerR / 2);
+                return (Number0To100)(cornerR / 2);
             }
             set
             {
                 if (value > 0)
-                    cornerR = value * 2;
+                    cornerR = (int)value * 2;
                 else
                     throw new ArgumentException("Corner R", "0 以上の値を入れてください。");
 
@@ -34,19 +56,100 @@ namespace ModernButtonLib
             }
         }
 
-        [Category("ModernDesign")]
+        [Category("Appearance")]
         [Browsable(true)]
-        [Description("影の大きさを指定します。")]
-        public int ShadowSize
+        [Description("ボタン表面のハイライトの色を指定します。")]
+        public Color HighLightColor
         {
             get
             {
-                return shadowSize;
+                return highLightColor;
+            }
+            set
+            {
+                highLightColor = value;
+                Refresh();
+            }
+        }
+
+        [Category("Appearance")]
+        [Browsable(true)]
+        [Description("ボタン表面の色を指定します。")]
+        public Color SurfaceColor
+        {
+            get
+            {
+                return surfaceColor;
+            }
+            set
+            {
+                surfaceColor = value;
+                Refresh();
+            }
+        }
+
+        [Category("Appearance")]
+        [Browsable(true)]
+        [Description("ボタン上にマウスが来た時の枠の色を指定します。")]
+        public Color BorderColor
+        {
+            get
+            {
+                return borderColor;
+            }
+            set
+            {
+                borderColor = value;
+                //Refresh();
+            }
+        }
+
+        [Category("Appearance")]
+        [Browsable(true)]
+        [Description("フォーカスが当たった時の枠の色を指定します。")]
+        public Color FocusColor
+        {
+            get
+            {
+                return focusColor;
+            }
+            set
+            {
+                focusColor = value;
+                //Refresh();
+            }
+        }
+
+
+        [Category("Appearance")]
+        [Browsable(true)]
+        [Description("ボタンの文字列を指定します。")]
+        public string ButtonText
+        {
+            get
+            {
+                return buttonText;
+            }
+            set
+            {
+                buttonText = value;
+                Refresh();
+            }
+        }
+
+        [Category("Appearance")]
+        [Browsable(true)]
+        [Description("影の大きさを指定します。")]
+        public Number0To100 ShadowSize
+        {
+            get
+            {
+                return (Number0To100)shadowSize;
             }
             set
             {
                 if (value >= 0)
-                    shadowSize = value;
+                    shadowSize = (int)value;
                 else
                     throw new ArgumentException("ShadowSize", "0 以上の値を入れてください。");
 
@@ -54,8 +157,10 @@ namespace ModernButtonLib
                 Refresh();
             }
         }
+
         #endregion
 
+        // コンストラクタ
         public RoundCornerButton()
         {
             InitializeComponent();
@@ -63,71 +168,136 @@ namespace ModernButtonLib
             // コントロールのサイズが変更された時に Paint イベントを発生させる
             SetStyle(ControlStyles.ResizeRedraw, true);
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            //SetStyle(ControlStyles., true);
 
             this.BackColor = Color.Transparent;
 
             RenewPadding();
+            //labelCaption.Text = "RoundButton";
         }
 
+        // マウス Enter イベントのオーバーライド
         protected override void OnMouseEnter(EventArgs e)
         {
             base.OnMouseEnter(e);
 
             Refresh();
             Graphics g = this.CreateGraphics();
-            DrawButtonCorner(g, FlatAppearance.MouseOverBackColor);
+            DrawButtonCorner(g, borderColor);
             g.Dispose();
         }
 
+        // マウス Leave イベントのオーバーライド
         protected override void OnMouseLeave(EventArgs e)
         {
             base.OnMouseLeave(e);
 
             Refresh();
 
+            // マウスが離れてもフォーカスは残っていることがあるので、
+            // そのときはフォーカス用の色で枠を塗る
             if (this.Focused)
             {
                 Graphics g = this.CreateGraphics();
-                DrawButtonCorner(g, BackColor);
+                DrawButtonCorner(g, focusColor);
                 g.Dispose();
             }
         }
 
+        // マウス Down イベントのオーバーライド
         protected override void OnMouseDown(MouseEventArgs e)
         {
-            //if (!mouseDowning)
-            //{
-            //    mouseDowning = true;
+            if (!mouseDowning)
+            {
+                mouseDowning = true;
                 Refresh();
                 Graphics g = this.CreateGraphics();
                 DrawButtonSurfaceDown(g);
-            //DrawButtonCorner(g, FlatAppearance.MouseDownBackColor);
+                //DrawButtonCorner(g, borderColor);
                 g.Dispose();
-            //}
+            }
 
             base.OnMouseDown(e);
         }
 
+        // マウス Up イベントのオーバーライド
         protected override void OnMouseUp(MouseEventArgs e)
         {
-            //if (mouseDowning)
-            //{
-            //    mouseDowning = false;
+            if (mouseDowning)
+            {
+                mouseDowning = false;
                 Refresh();
                 Graphics g = this.CreateGraphics();
-                DrawButtonCorner(g, FlatAppearance.MouseOverBackColor);
+                DrawButtonCorner(g, borderColor);
                 g.Dispose();
-            //}
+            }
 
             base.OnMouseUp(e);
         }
 
+        // フォーカスが当たった時
+        protected override void OnGotFocus(EventArgs e)
+        {
+            base.OnGotFocus(e);
+
+            if (!mouseDowning)
+            {
+                Graphics g = this.CreateGraphics();
+                DrawButtonCorner(g, focusColor);
+                g.Dispose();
+            }
+        }
+
+        // フォーカスを失った時
+        protected override void OnLostFocus(EventArgs e)
+        {
+            base.OnLostFocus(e);
+
+            Refresh();
+        }
+
+        // キーが押された時
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            // スペースキーが押された時は、マウス Down と同じように処理する
+            if (!mouseDowning && e.KeyCode == Keys.Space)
+            {
+                mouseDowning = true;
+                Refresh();
+                Graphics g = this.CreateGraphics();
+                DrawButtonSurfaceDown(g);
+                g.Dispose();
+            }
+
+            base.OnKeyDown(e);
+        }
+
+        // キーが離された時
+        protected override void OnKeyUp(KeyEventArgs e)
+        {
+            // スペースキーが離された時は、マウス Up と同じように処理する
+            // 枠の色だけはフォーカスの色にする
+            if (mouseDowning && e.KeyCode == Keys.Space)
+            {
+                mouseDowning = false;
+                Refresh();
+                Graphics g = this.CreateGraphics();
+                DrawButtonCorner(g, focusColor);
+                g.Dispose();
+            }
+
+            base.OnKeyUp(e);
+        }
+
+        // Paint イベントのオーバーライド
         protected override void OnPaint(PaintEventArgs e)
         {
+            //base.OnPaint(e);
             DrawButtonSurface(e.Graphics);
         }
 
-        #region 角を丸めたボタンを描画
+        //---------------------------------------------------------------------
+        #region "プライベートメソッド"
 
         // Padding サイズ更新
         private void RenewPadding()
@@ -150,7 +320,7 @@ namespace ModernButtonLib
             StringBuilder sb = new StringBuilder();
             StringBuilder sbm = new StringBuilder();
 
-            foreach (char c in Text)
+            foreach (char c in buttonText)
             {
                 sbm.Append(c);
                 Size size = TextRenderer.MeasureText(sbm.ToString(), this.Font);
@@ -173,6 +343,7 @@ namespace ModernButtonLib
                 rectangle,
                 this.ForeColor,
                 TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+
         }
 
         // ボタンの描画品質設定
@@ -190,29 +361,7 @@ namespace ModernButtonLib
 
             int w = this.Width - cornerR;
             int h = this.Height - cornerR;
-            /*
-			int ox = this.Width;
-			int oy = this.Height;
-
-			if (ox < oy)
-			{
-				float ratio = (float)shadowSize / oy;
-				ox = shadowSize - (int)(ratio * ox);
-				oy = 0;
-			}
-			else
-			{
-				float ratio = (float)shadowSize / ox;
-				ox = 0;
-				oy = shadowSize - (int)(ratio * oy);
-			}
-
-			gp.AddArc(ox, oy, cornerR, cornerR, 180, 90);
-			gp.AddArc(w - ox, oy, cornerR, cornerR, 270, 90);
-			gp.AddArc(w - ox, h - oy, cornerR, cornerR, 0, 90);
-			gp.AddArc(ox, h - oy, cornerR, cornerR, 90, 90);
-			gp.CloseFigure();
-			*/
+         
             gp.AddArc(0, 0, cornerR, cornerR, 180, 90);
             gp.AddArc(w, 0, cornerR, cornerR, 270, 90);
             gp.AddArc(w, h, cornerR, cornerR, 0, 90);
@@ -291,12 +440,19 @@ namespace ModernButtonLib
                 shadowBrush = GetShadowBrush(shadowPath);
 
             // ボタンの表面用のブラシ初期化
-            Brush fillBrush = new SolidBrush(BackColor);
+            Brush fillBrush2 = new SolidBrush(surfaceColor);
+
+            // ボタンのハイライト部分用のブラシ初期化
+            LinearGradientBrush fillBrush = new LinearGradientBrush(new Point(0, 0),
+                                                    new Point(0, harfHeight + 1),
+                                                    Color.FromArgb(255, highLightColor),
+                                                    Color.FromArgb(0, surfaceColor));
 
             // 影 → 表面 → ハイライトの順番でパスを塗る
             if (shadowSize > 0)
                 g.FillPath(shadowBrush, shadowPath);
-            g.FillPath(fillBrush, graphPath);
+            g.FillPath(fillBrush2, graphPath);
+            g.FillPath(fillBrush, graphPath2);
 
             // ボタンの文字列描画
             DrawText(g);
@@ -310,6 +466,7 @@ namespace ModernButtonLib
             if (shadowSize > 0)
                 shadowBrush.Dispose();
             fillBrush.Dispose();
+            fillBrush2.Dispose();
         }
 
         // ボタンの表面描画　（マウス Down イベント時）
@@ -371,7 +528,8 @@ namespace ModernButtonLib
             graphPath.Dispose();
             cornerPen.Dispose();
         }
-        #endregion
 
+        #endregion
+        //---------------------------------------------------------------------
     }
 }

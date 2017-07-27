@@ -41,11 +41,6 @@
             // 
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.FlatAppearance.BorderSize = 0;
-            this.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
             this.UseVisualStyleBackColor = false;
             this.ResumeLayout(false);
 
