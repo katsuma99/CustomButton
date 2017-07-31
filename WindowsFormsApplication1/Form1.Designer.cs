@@ -28,10 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button1 = new System.Windows.Forms.Button();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.textBaseButton1 = new SimpleButtonLib.TextBaseButton();
             this.hoverEffect1 = new ModernButtonLib.HoverEffect();
             ((System.ComponentModel.ISupportInitialize)(this.textBaseButton1)).BeginInit();
@@ -39,7 +37,7 @@
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button1.Cursor = System.Windows.Forms.Cursors.Default;
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
@@ -55,14 +53,6 @@
             this.button1.TabIndex = 1;
             this.button1.Text = "WinFormButton1";
             this.button1.UseVisualStyleBackColor = false;
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "BtNormal.png");
-            this.imageList1.Images.SetKeyName(1, "BtNormalOn.png");
-            this.imageList1.Images.SetKeyName(2, "BtPushed.png");
             // 
             // textBaseButton1
             // 
@@ -84,14 +74,21 @@
             // 
             // hoverEffect1
             // 
-            this.hoverEffect1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.hoverEffect1.BackColor = System.Drawing.Color.Transparent;
             this.hoverEffect1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.hoverEffect1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Turquoise;
-            this.hoverEffect1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.hoverEffect1.CornerR = ModernButtonLib.HoverEffect.Number0To100._5;
+            this.hoverEffect1.FlatAppearance.BorderSize = 0;
+            this.hoverEffect1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.hoverEffect1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.hoverEffect1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hoverEffect1.Location = new System.Drawing.Point(84, 171);
+            this.hoverEffect1.ForeColor = System.Drawing.Color.White;
+            this.hoverEffect1.Location = new System.Drawing.Point(83, 195);
+            this.hoverEffect1.MouseDownButtonColor = System.Drawing.Color.Turquoise;
+            this.hoverEffect1.MouseLeaveButtonColor = System.Drawing.Color.Black;
+            this.hoverEffect1.MouseOverButtonColor = System.Drawing.Color.Gray;
             this.hoverEffect1.Name = "hoverEffect1";
-            this.hoverEffect1.Size = new System.Drawing.Size(116, 64);
+            this.hoverEffect1.Size = new System.Drawing.Size(130, 54);
+            this.hoverEffect1.State = ModernButtonLib.HoverEffect.OperatingState.Leave;
             this.hoverEffect1.TabIndex = 3;
             this.hoverEffect1.Text = "hoverEffect1";
             this.hoverEffect1.UseVisualStyleBackColor = false;
@@ -100,6 +97,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.BackgroundImage = global::WindowsFormsApplication1.Properties.Resources.BtPushed;
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.hoverEffect1);
             this.Controls.Add(this.textBaseButton1);
@@ -114,7 +113,6 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
-        public System.Windows.Forms.ImageList imageList1;
         private SimpleButtonLib.TextBaseButton textBaseButton1;
         private ModernButtonLib.HoverEffect hoverEffect1;
     }

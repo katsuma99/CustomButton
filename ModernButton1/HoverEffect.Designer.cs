@@ -39,8 +39,13 @@
             // 
             // HoverEffect
             // 
-            this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.BackColor = System.Drawing.Color.Transparent;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.FlatAppearance.BorderSize = 0;
+            this.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ForeColor = System.Drawing.Color.White;
             this.UseVisualStyleBackColor = false;
             this.ResumeLayout(false);
 

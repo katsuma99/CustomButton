@@ -8,7 +8,7 @@ namespace ModernButtonLib
 {
     public partial class HoverEffect : Button
     {
-        protected enum OperatingState
+        public enum OperatingState
         {
             Leave,
             Enter,
@@ -30,17 +30,14 @@ namespace ModernButtonLib
             _90, _91, _92, _93, _94, _95, _96, _97, _98, _99, _100,
         }
 
-        private int shadowSize = 0;// 影の大きさ
-        private int cornerR = 1;// コーナーの角丸のサイズ（直径）
-        Form mFocusForm = null;
 
         #region 変数
         Color mButtonColor = DefaultBackColor;
 
         OperatingState mState = OperatingState.Leave;
-        [Category("カスタム：ボタンイメージ"), Description("初期のボタン状態（通常・選択・決定）")]
+        [Category("カスタム"), Description("初期のボタン状態（通常・選択・決定）")]
         [DefaultValue(typeof(OperatingState), "None")]
-        protected OperatingState State
+        public OperatingState State
         {
             get { return mState; }
             set
@@ -57,21 +54,38 @@ namespace ModernButtonLib
             get { return base.FlatStyle; }
             set { base.FlatStyle = value; }
         }
+
+        public int cornerR = 10;// コーナーの角丸のサイズ（直径）
+        [Category("カスタム"), Description("角の丸さ")]
+        public Number0To100 CornerR
+        {
+            get
+            {
+                return (Number0To100)(cornerR / 2);
+            }
+            set
+            {
+                if (value > 0)
+                    cornerR = (int)value * 2;
+                else
+                    value = Number0To100._1;
+
+                Refresh();
+            }
+        }
+
+        [Category("カスタム"), Description("ボタンの色（通常時）")]
+        public Color MouseLeaveButtonColor { get; set; } = Color.Black;
+        [Category("カスタム"), Description("ボタンの色（マウスオーバー時）")]
+        public Color MouseOverButtonColor { get; set; } = Color.Gray;
+        [Category("カスタム"), Description("ボタンの色（マウスダウン時）")]
+        public Color MouseDownButtonColor { get; set; } = Color.Turquoise;
         #endregion
 
         public HoverEffect()
         {
             InitializeComponent();
             mState = OperatingState.Leave;
-            FlatStyle = FlatStyle.Flat;
-            if(FlatAppearance.MouseDownBackColor.IsEmpty) FlatAppearance.MouseDownBackColor = Color.Turquoise;
-            if(FlatAppearance.MouseOverBackColor.IsEmpty) FlatAppearance.MouseOverBackColor = Color.Gray;
-            if(Parent == null && mFocusForm != null) this.Parent = mFocusForm;
-        }
-
-        private void FormSupportUtils_ParentChanged(object sender, EventArgs e)
-        {
-            mFocusForm = (Form)this.Parent;//フォーム生成時にthis.Activate()しないと、エラーメッセージ生成時にとまる
         }
 
         #region ボタンイベント処理
@@ -105,17 +119,17 @@ namespace ModernButtonLib
             switch (mState)
             {
                 case OperatingState.Leave:
-                    mButtonColor = BackColor;
+                    mButtonColor = MouseLeaveButtonColor;
                     break;
                 case OperatingState.Enter:
-                    mButtonColor = FlatAppearance.MouseOverBackColor;
+                    mButtonColor = MouseOverButtonColor;
                     break;
                 case OperatingState.Down:
-                    mButtonColor = FlatAppearance.MouseDownBackColor;
+                    mButtonColor = MouseDownButtonColor; 
                     ColorChangeTimer.Stop();
                     break;
                 case OperatingState.Up:
-                    mButtonColor = FlatAppearance.MouseOverBackColor;
+                    mButtonColor = MouseOverButtonColor;
 
                     break;
             }
@@ -124,6 +138,7 @@ namespace ModernButtonLib
 
         protected override void OnPaint(PaintEventArgs pe)
         {
+            base.OnPaint(pe);
             DrawButtonSurface(pe.Graphics);
         }
 
@@ -131,17 +146,16 @@ namespace ModernButtonLib
         private void DrawButtonSurface(Graphics g)
         {
             // 変数初期化
-            int offset = shadowSize;
             int w = this.Width - cornerR;
             int h = this.Height - cornerR;
             int harfHeight = (int)(this.Height / 2);
 
             // ボタンの表面のパス初期化
             GraphicsPath graphPath = new GraphicsPath();
-            graphPath.AddArc(offset, offset, cornerR, cornerR, 180, 90);
-            graphPath.AddArc(w - offset, offset, cornerR, cornerR, 270, 90);
-            graphPath.AddArc(w - offset, h - offset, cornerR, cornerR, 0, 90);
-            graphPath.AddArc(offset, h - offset, cornerR, cornerR, 90, 90);
+            graphPath.AddArc(0, 0, cornerR, cornerR, 180, 90);
+            graphPath.AddArc(w, 0, cornerR, cornerR, 270, 90);
+            graphPath.AddArc(w, h, cornerR, cornerR, 0, 90);
+            graphPath.AddArc(0, h, cornerR, cornerR, 90, 90);
             graphPath.CloseFigure();
 
 
@@ -152,6 +166,7 @@ namespace ModernButtonLib
 
             // ボタンの文字列描画
             //DrawText(g);
+            
         }
     }
 }
