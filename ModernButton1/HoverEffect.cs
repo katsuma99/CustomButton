@@ -6,7 +6,7 @@ using System.Drawing.Drawing2D;
 
 namespace ModernButtonLib
 {
-    public partial class HoverEffect : Button
+    public partial class HoverEffect : RoundCornerButton
     {
         public enum OperatingState
         {
@@ -16,23 +16,12 @@ namespace ModernButtonLib
             Up
         }
 
-        public enum Number0To100
-        {
-            _0, _1, _2, _3, _4, _5, _6, _7, _8, _9,
-            _10, _11, _12, _13, _14, _15, _16, _17, _18, _19,
-            _20, _21, _22, _23, _24, _25, _26, _27, _28, _29,
-            _30, _31, _32, _33, _34, _35, _36, _37, _38, _39,
-            _40, _41, _42, _43, _44, _45, _46, _47, _48, _49,
-            _50, _51, _52, _53, _54, _55, _56, _57, _58, _59,
-            _60, _61, _62, _63, _64, _65, _66, _67, _68, _69,
-            _70, _71, _72, _73, _74, _75, _76, _77, _78, _79,
-            _80, _81, _82, _83, _84, _85, _86, _87, _88, _89,
-            _90, _91, _92, _93, _94, _95, _96, _97, _98, _99, _100,
-        }
-
-
         #region 変数
-        Color mButtonColor = DefaultBackColor;
+        Color mButtonFrontColor;
+        private Timer mButtonAnimationTimer = new Timer();
+        PointF mMousePos = new PointF();
+        long mElapsedTime_FadeAnim = 0;
+        long mElapsedTime_CircleAnim = 0;
 
         OperatingState mState = OperatingState.Leave;
         [Category("カスタム"), Description("初期のボタン状態（通常・選択・決定）")]
@@ -44,48 +33,23 @@ namespace ModernButtonLib
             {
                 if (mState == value) return;
                 mState = value;
-                ColorChangeTimer.Start();
+                mButtonAnimationTimer.Start();
             }
         }
 
-        [Browsable(false)]
-        public new FlatStyle FlatStyle
-        {
-            get { return base.FlatStyle; }
-            set { base.FlatStyle = value; }
-        }
+        [Category("カスタム"), Description("フェードアニメーションの時間")]
+        public int FadeAnimationTime { get; set; } = 300;
 
-        public int cornerR = 10;// コーナーの角丸のサイズ（直径）
-        [Category("カスタム"), Description("角の丸さ")]
-        public Number0To100 CornerR
-        {
-            get
-            {
-                return (Number0To100)(cornerR / 2);
-            }
-            set
-            {
-                if (value > 0)
-                    cornerR = (int)value * 2;
-                else
-                    value = Number0To100._1;
-
-                Refresh();
-            }
-        }
-
-        [Category("カスタム"), Description("ボタンの色（通常時）")]
-        public Color MouseLeaveButtonColor { get; set; } = Color.Black;
-        [Category("カスタム"), Description("ボタンの色（マウスオーバー時）")]
-        public Color MouseOverButtonColor { get; set; } = Color.Gray;
-        [Category("カスタム"), Description("ボタンの色（マウスダウン時）")]
-        public Color MouseDownButtonColor { get; set; } = Color.Turquoise;
+        [Category("カスタム"), Description("サークルアニメーションの時間")]
+        public int CircleAnimationTime { get; set; } = 100;
         #endregion
 
         public HoverEffect()
         {
             InitializeComponent();
             mState = OperatingState.Leave;
+            mButtonAnimationTimer.Interval = 10;
+            mButtonAnimationTimer.Tick += new EventHandler(AnimateButton);
         }
 
         #region ボタンイベント処理
@@ -93,80 +57,112 @@ namespace ModernButtonLib
         {
             State = OperatingState.Down;
             base.OnMouseDown(mevent);
+            
+            StartButtonAnimation(new PointF(mevent.X, mevent.Y));
         }
 
         protected override void OnMouseUp(MouseEventArgs mevent)
         {
             State = OperatingState.Up;
             base.OnMouseUp(mevent);
+
+            StartButtonAnimation(new PointF(mevent.X, mevent.Y));
         }
 
         protected override void OnMouseEnter(EventArgs e)
         {
             State = OperatingState.Enter;
             base.OnMouseEnter(e);
+
+            StartButtonAnimation();
         }
 
         protected override void OnMouseLeave(EventArgs e)
         {
             State = OperatingState.Leave;
             base.OnMouseLeave(e);
+
+            StartButtonAnimation();
         }
         #endregion
 
-        private void ColorChangeTimer_Tick(object sender, EventArgs e)
+        protected override void OnPaint(PaintEventArgs pe)
+        {
+            DrawButtonBack(pe);
+            DrawButton(pe.Graphics);
+            DrawButtonFront(pe.Graphics);
+            DrawButtonText(pe.Graphics);
+        }
+
+        // ボタンのアニメーションを描画
+        private void DrawButtonFront(Graphics g)
+        {
+            g.CompositingMode = CompositingMode.SourceOver;
+            long elapsedTime = mElapsedTime_FadeAnim;
+            int animTime = FadeAnimationTime;
+            if (mState == OperatingState.Down || mState == OperatingState.Up)
+            {
+                elapsedTime = mElapsedTime_CircleAnim;
+                animTime = CircleAnimationTime;
+            }
+
+            int alpha = (int)(elapsedTime / (float)animTime * 255);
+            using (Brush buttonBrush = new SolidBrush(Color.FromArgb(Math.Max(0, Math.Min(255,alpha)), mButtonFrontColor)))
+            {
+                g.FillPath(buttonBrush, graphPath);
+            }
+            float radius = mElapsedTime_CircleAnim / (float)CircleAnimationTime * Math.Max(Width,Height);
+            using (Brush buttonBrush = new SolidBrush(mButtonFrontColor))
+            {
+                g.FillEllipse(buttonBrush, mMousePos.X - radius, mMousePos.Y - radius, radius * 2, radius * 2);
+            }
+        }
+
+        private void StartButtonAnimation(PointF? p = null)
         {
             switch (mState)
             {
                 case OperatingState.Leave:
-                    mButtonColor = MouseLeaveButtonColor;
-                    break;
                 case OperatingState.Enter:
-                    mButtonColor = MouseOverButtonColor;
+                    mButtonColor = MouseLeaveButtonColor;
+                    mButtonFrontColor = MouseOverButtonColor;
                     break;
                 case OperatingState.Down:
-                    mButtonColor = MouseDownButtonColor; 
-                    ColorChangeTimer.Stop();
-                    break;
                 case OperatingState.Up:
                     mButtonColor = MouseOverButtonColor;
-
+                    mButtonFrontColor = MouseDownButtonColor;
+                    if (p.HasValue)
+                        mMousePos = p.Value;
                     break;
             }
-            Refresh();
-        }
-
-        protected override void OnPaint(PaintEventArgs pe)
-        {
-            base.OnPaint(pe);
-            DrawButtonSurface(pe.Graphics);
-        }
-
-        // ボタンの表面描画
-        private void DrawButtonSurface(Graphics g)
-        {
-            // 変数初期化
-            int w = this.Width - cornerR;
-            int h = this.Height - cornerR;
-            int harfHeight = (int)(this.Height / 2);
-
-            // ボタンの表面のパス初期化
-            GraphicsPath graphPath = new GraphicsPath();
-            graphPath.AddArc(0, 0, cornerR, cornerR, 180, 90);
-            graphPath.AddArc(w, 0, cornerR, cornerR, 270, 90);
-            graphPath.AddArc(w, h, cornerR, cornerR, 0, 90);
-            graphPath.AddArc(0, h, cornerR, cornerR, 90, 90);
-            graphPath.CloseFigure();
-
-
-            using (Brush brush = new SolidBrush(mButtonColor))
-            {
-                g.FillPath(brush, graphPath);
-            }
-
-            // ボタンの文字列描画
-            //DrawText(g);
             
+            mButtonAnimationTimer.Start();
+        }
+
+        void AnimateButton(Object sender, System.EventArgs ea)
+        {
+
+            bool isDecrease = mState == OperatingState.Leave || mState == OperatingState.Up;
+            int addValue = mButtonAnimationTimer.Interval * (isDecrease ? -1 : 1);
+            if (mState != OperatingState.Up)
+            {
+                mElapsedTime_FadeAnim += addValue;
+                mElapsedTime_FadeAnim = Math.Max(0, Math.Min(FadeAnimationTime, mElapsedTime_FadeAnim));
+            }
+            if (mState != OperatingState.Enter)
+            {
+                mElapsedTime_CircleAnim += addValue;
+                mElapsedTime_CircleAnim = Math.Max(0, Math.Min(CircleAnimationTime, mElapsedTime_CircleAnim));
+            }
+            else
+                mElapsedTime_CircleAnim = 0;
+
+            bool isMaxValue = mElapsedTime_FadeAnim == FadeAnimationTime && mElapsedTime_CircleAnim == CircleAnimationTime;
+            bool isMinValue = mElapsedTime_FadeAnim == 0 && mElapsedTime_CircleAnim == 0;
+            if (isMaxValue || isMinValue)
+                mButtonAnimationTimer.Stop();
+
+            Refresh();
         }
     }
 }

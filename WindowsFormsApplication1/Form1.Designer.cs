@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button1 = new System.Windows.Forms.Button();
             this.textBaseButton1 = new SimpleButtonLib.TextBaseButton();
+            this.roundCornerButton1 = new ModernButtonLib.RoundCornerButton();
             this.hoverEffect1 = new ModernButtonLib.HoverEffect();
             ((System.ComponentModel.ISupportInitialize)(this.textBaseButton1)).BeginInit();
             this.SuspendLayout();
@@ -72,24 +73,42 @@
             this.textBaseButton1.TabStop = false;
             this.textBaseButton1.Text = "textBaseButton1";
             // 
+            // roundCornerButton1
+            // 
+            this.roundCornerButton1.CornerR = ModernButtonLib.RoundCornerButton.Number0To100._10;
+            this.roundCornerButton1.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
+            this.roundCornerButton1.ForeColor = System.Drawing.Color.White;
+            this.roundCornerButton1.Location = new System.Drawing.Point(59, 26);
+            this.roundCornerButton1.MouseDownButtonColor = System.Drawing.Color.Turquoise;
+            this.roundCornerButton1.MouseLeaveButtonColor = System.Drawing.Color.Black;
+            this.roundCornerButton1.MouseOverButtonColor = System.Drawing.Color.Gray;
+            this.roundCornerButton1.Name = "roundCornerButton1";
+            this.roundCornerButton1.Size = new System.Drawing.Size(128, 50);
+            this.roundCornerButton1.TabIndex = 3;
+            this.roundCornerButton1.Text = "roundCornerButton1";
+            this.roundCornerButton1.UseVisualStyleBackColor = true;
+            // 
             // hoverEffect1
             // 
             this.hoverEffect1.BackColor = System.Drawing.Color.Transparent;
             this.hoverEffect1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.hoverEffect1.CornerR = ModernButtonLib.HoverEffect.Number0To100._5;
+            this.hoverEffect1.CircleAnimationTime = 100;
+            this.hoverEffect1.CornerR = ModernButtonLib.RoundCornerButton.Number0To100._10;
+            this.hoverEffect1.FadeAnimationTime = 300;
             this.hoverEffect1.FlatAppearance.BorderSize = 0;
             this.hoverEffect1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.hoverEffect1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.hoverEffect1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hoverEffect1.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
             this.hoverEffect1.ForeColor = System.Drawing.Color.White;
-            this.hoverEffect1.Location = new System.Drawing.Point(83, 195);
+            this.hoverEffect1.Location = new System.Drawing.Point(59, 203);
             this.hoverEffect1.MouseDownButtonColor = System.Drawing.Color.Turquoise;
             this.hoverEffect1.MouseLeaveButtonColor = System.Drawing.Color.Black;
             this.hoverEffect1.MouseOverButtonColor = System.Drawing.Color.Gray;
             this.hoverEffect1.Name = "hoverEffect1";
-            this.hoverEffect1.Size = new System.Drawing.Size(130, 54);
+            this.hoverEffect1.Size = new System.Drawing.Size(128, 50);
             this.hoverEffect1.State = ModernButtonLib.HoverEffect.OperatingState.Leave;
-            this.hoverEffect1.TabIndex = 3;
+            this.hoverEffect1.TabIndex = 4;
             this.hoverEffect1.Text = "hoverEffect1";
             this.hoverEffect1.UseVisualStyleBackColor = false;
             // 
@@ -97,12 +116,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.BackgroundImage = global::WindowsFormsApplication1.Properties.Resources.BtPushed;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.hoverEffect1);
+            this.Controls.Add(this.roundCornerButton1);
             this.Controls.Add(this.textBaseButton1);
             this.Controls.Add(this.button1);
+            this.DoubleBuffered = true;
+            this.KeyPreview = true;
+            this.MinimumSize = new System.Drawing.Size(300, 300);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.textBaseButton1)).EndInit();
@@ -114,6 +137,7 @@
 
         private System.Windows.Forms.Button button1;
         private SimpleButtonLib.TextBaseButton textBaseButton1;
+        private ModernButtonLib.RoundCornerButton roundCornerButton1;
         private ModernButtonLib.HoverEffect hoverEffect1;
     }
 }

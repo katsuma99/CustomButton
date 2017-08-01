@@ -85,6 +85,10 @@
       <Project>{dcd7ed9c-5471-4def-8f23-b7b6ca5a7631}</Project>
       <Name>CustomButtonLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FormSupportLib\FormSupportLib.csproj">
+      <Project>{F9412781-0384-47A6-B507-3E6A086219F0}</Project>
+      <Name>FormSupportLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ModernButton1\ModernButtonLib.csproj">
       <Project>{abd7c495-f004-47a6-9b26-d0044110f268}</Project>
       <Name>ModernButtonLib</Name>

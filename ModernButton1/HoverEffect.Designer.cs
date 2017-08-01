@@ -29,13 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.ColorChangeTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
-            // 
-            // ColorChangeTimer
-            // 
-            this.ColorChangeTimer.Interval = 1;
-            this.ColorChangeTimer.Tick += new System.EventHandler(this.ColorChangeTimer_Tick);
             // 
             // HoverEffect
             // 
@@ -52,7 +46,5 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Timer ColorChangeTimer;
     }
 }

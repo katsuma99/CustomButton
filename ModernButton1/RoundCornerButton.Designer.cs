@@ -32,7 +32,7 @@
             // 
             // RoundCornerButton
             // 
-            this.BackColor = System.Drawing.Color.Transparent;
+            this.Size = new System.Drawing.Size(128, 50);
             this.ResumeLayout(false);
 
         }
