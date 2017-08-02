@@ -1,7 +1,0 @@
-C:\Users\katsumaPC\Desktop\Qiitaメモ\5.[C#]カスタムコントロール\CustomControl\CountDownButtonLib\bin\Debug\CountDownButtonLib.dll
-C:\Users\katsumaPC\Desktop\Qiitaメモ\5.[C#]カスタムコントロール\CustomControl\CountDownButtonLib\bin\Debug\CountDownButtonLib.pdb
-C:\Users\katsumaPC\Desktop\Qiitaメモ\5.[C#]カスタムコントロール\CustomControl\CountDownButtonLib\obj\Debug\CountDownButtonLib.csprojResolveAssemblyReference.cache
-C:\Users\katsumaPC\Desktop\Qiitaメモ\5.[C#]カスタムコントロール\CustomControl\CountDownButtonLib\obj\Debug\CountDownButtonLib.dll
-C:\Users\katsumaPC\Desktop\Qiitaメモ\5.[C#]カスタムコントロール\CustomControl\CountDownButtonLib\obj\Debug\CountDownButtonLib.pdb
-C:\Users\katsumaPC\Desktop\Qiitaメモ\5.[C#]カスタムコントロール\CustomControl\CountDownButtonLib\obj\Debug\CountDownButtonLib.CountDownButton.resources
-C:\Users\katsumaPC\Desktop\Qiitaメモ\5.[C#]カスタムコントロール\CustomControl\CountDownButtonLib\obj\Debug\CountDownButtonLib.csproj.GenerateResource.Cache
