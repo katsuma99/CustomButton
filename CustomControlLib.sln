@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApplication1", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernButtonLib", "ModernButton1\ModernButtonLib.csproj", "{ABD7C495-F004-47A6-9B26-D0044110F268}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CountDownButtonLib", "CountDownButtonLib\CountDownButtonLib.csproj", "{8D4A290D-9224-4352-AC5A-8A26F93B15AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,18 @@ Global
 		{ABD7C495-F004-47A6-9B26-D0044110F268}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{ABD7C495-F004-47A6-9B26-D0044110F268}.Release|x86.ActiveCfg = Release|Any CPU
 		{ABD7C495-F004-47A6-9B26-D0044110F268}.Release|x86.Build.0 = Release|Any CPU
+		{8D4A290D-9224-4352-AC5A-8A26F93B15AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D4A290D-9224-4352-AC5A-8A26F93B15AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D4A290D-9224-4352-AC5A-8A26F93B15AF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{8D4A290D-9224-4352-AC5A-8A26F93B15AF}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{8D4A290D-9224-4352-AC5A-8A26F93B15AF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8D4A290D-9224-4352-AC5A-8A26F93B15AF}.Debug|x86.Build.0 = Debug|Any CPU
+		{8D4A290D-9224-4352-AC5A-8A26F93B15AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D4A290D-9224-4352-AC5A-8A26F93B15AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D4A290D-9224-4352-AC5A-8A26F93B15AF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{8D4A290D-9224-4352-AC5A-8A26F93B15AF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{8D4A290D-9224-4352-AC5A-8A26F93B15AF}.Release|x86.ActiveCfg = Release|Any CPU
+		{8D4A290D-9224-4352-AC5A-8A26F93B15AF}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -81,6 +81,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CountDownButtonLib\CountDownButtonLib.csproj">
+      <Project>{8d4a290d-9224-4352-ac5a-8a26f93b15af}</Project>
+      <Name>CountDownButtonLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CustomButtonLib\CustomButtonLib.csproj">
       <Project>{dcd7ed9c-5471-4def-8f23-b7b6ca5a7631}</Project>
       <Name>CustomButtonLib</Name>
